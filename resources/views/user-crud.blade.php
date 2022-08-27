@@ -17,6 +17,7 @@
         @method('delete')
     @else
     @endif
+    <input type="hidden" name="uuid" value="{{ $user ? $user->uuid : '' }}"/>
     <div class="mb-3">
         <label for="inputName" class="form-label">Name</label>
         <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ $user ? $user->name : '' }}">
@@ -29,7 +30,7 @@
         <label for="inputRoles" class="form-label">Roles</label>
         <select class="form-select mb-3" aria-label="Default select example" name="roles">
             @foreach ($roles as $key => $val)
-                <option value="{{ $key }}">{{ $val }}</option>
+                <option value="{{ $key }}" {{ $user && $user->roles->first()->id == $key ? 'selected':'' }}>{{ $val }}</option>
             @endforeach
         </select>
     </div>

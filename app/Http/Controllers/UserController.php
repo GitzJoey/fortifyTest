@@ -36,16 +36,50 @@ class UserController extends Controller
     {
         $name = $request->name;
         $email = $request->email;
-        $roles = $request->roles
+        $roles = $request->roles;
+        
+        $user = new User();
+        $user->name = $name;
+        $user->email = $email;
+        $user->save();
+
+        $role = Role::find($roles);
+
+        $user->assignRole($role);
+
+        return redirect()->route('users.index');
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        
+        $uuid = $request->uuid;
+        $name = $request->name;
+        $roles = $request->roles;
+
+        $user = User::where('uuid', '=', $uuid)->first();
+        $roles = Role::find($roles);
+
+        if ($user) {
+            $user->update([
+                'name' => $name
+            ]);
+
+            $user->assignRole($roles);
+        }
+
+        return redirect()->route('users.index');
     }
 
     public function delete(Request $request)
     {
+        $uuid = $request->uuid;
         
+        $user = User::where('uuid', '=', $uuid)->first();
+
+        if ($user) {
+            $user->delete();
+        }
+
+        return redirect()->route('users.index');
     }
 }
