@@ -17,7 +17,7 @@
     </div>
     <div class="mb-3">
         <label for="inputEmail" class="form-label">Email</label>
-        <input type="url" class="form-control" id="inputEmail" placeholder="Email">
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
     </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">Create</button>

@@ -10,12 +10,14 @@
 @slot('title') {{ ucfirst($mode) }} User @endslot
 @endcomponent
 
-<form action="{{ route('users.crud.create') }}">
+<form action="{{ route('users.crud.create') }}" method="post">
+    @csrf
     @if ($mode == 'edit')
         @method('patch')
     @elseif ($mode == 'delete')
         @method('delete')
     @else
+        @method('post')
     @endif
     <input type="hidden" name="uuid" value="{{ $user ? $user->uuid : '' }}"/>
     <div class="mb-3">
@@ -24,7 +26,7 @@
     </div>
     <div class="mb-3">
         <label for="inputEmail" class="form-label">Email</label>
-        <input type="url" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user ? $user->email : '' }}" {{ $mode == 'create' ? '':'disabled' }}>
+        <input type="text" class="form-control" id="inputEmail" placeholder="Email" value="{{ $user ? $user->email : '' }}" {{ $mode == 'create' ? '':'disabled' }}>
     </div>
     <div class="mb-3">
         <label for="inputRoles" class="form-label">Roles</label>
