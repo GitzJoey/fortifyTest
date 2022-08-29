@@ -45,11 +45,13 @@ class UserController extends Controller
         $email = $request->email;
         $roles = $request->roles;
         $password = $request->password;
+        $status = $request->status == 'on' ? 1:0;
 
         $user = new User();
         $user->name = $name;
         $user->email = $email;
         $user->password = Hash::make($password);
+        $user->status = $status;
         $user->save();
 
         $role = Role::find($roles);
@@ -65,13 +67,15 @@ class UserController extends Controller
         $name = $request->name;
         $roles = $request->roles;
         $password = $request->password;
+        $status = $request->status == 'on' ? 1:0;
 
         $user = User::where('uuid', '=', $uuid)->first();
         $roles = Role::find($roles);
 
         if ($user) {
             $user->update([
-                'name' => $name
+                'name' => $name,
+                'status' => $status
             ]);
 
             $user->syncRoles([$roles->name]);

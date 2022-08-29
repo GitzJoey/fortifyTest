@@ -37,14 +37,14 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::delete('/users/save', [UserController::class, 'delete'])->name('users.crud.delete');
 
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
-    Route::get('roles/crud/{role:uuid?}', [RoleController::class, 'crud'])->name('roles.crud');
+    Route::get('roles/crud/{role?}', [RoleController::class, 'crud'])->name('roles.crud');
    
     Route::post('/roles/save', [RoleController::class, 'create'])->name('roles.crud.create');
     Route::patch('/roles/save', [RoleController::class, 'update'])->name('roles.crud.update');
     Route::delete('/roles/save', [RoleController::class, 'delete'])->name('roles.crud.delete');
 
     Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
-    Route::get('permissions/crud/{permission:uuid?}', [PermissionController::class, 'crud'])->name('permissions.crud');
+    Route::get('permissions/crud/{permission?}', [PermissionController::class, 'crud'])->name('permissions.crud');
 
     Route::post('/permissions/save', [PermissionController::class, 'create'])->name('permissions.crud.create');
     Route::patch('/permissions/save', [PermissionController::class, 'update'])->name('permissions.crud.update');

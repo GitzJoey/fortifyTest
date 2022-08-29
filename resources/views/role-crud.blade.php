@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') @lang('translation.users') @endsection
+@section('title') @lang('translation.roles') @endsection
 @section('css')
 <link href="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('assets/libs/swiper/swiper.min.css')}}" rel="stylesheet" type="text/css" />
@@ -13,15 +13,21 @@
 <form action="">
     <div class="mb-3">
         <label for="inputName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="inputName" placeholder="Name">
-    </div>
-    <div class="mb-3">
-        <label for="inputEmail" class="form-label">Email</label>
-        <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+        <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{ $role ? $role->name : '' }}">
     </div>
     <div class="text-end">
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a href="{{ route('users.index') }}" class="btn btn-primary">Cancel</a>
+        <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>
+
+        @if($mode == 'edit')
+        <form action="{{ route('roles.crud.create') }}" method="post">
+            @csrf
+            @method('delete')
+            <input type="hidden" name="uuid" value="{{ $role ? $role->id : '' }}"/>
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+        @endif
+
+        <a href="{{ route('roles.index') }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>
 

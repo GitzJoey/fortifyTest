@@ -42,20 +42,35 @@
             @endforeach
         </select>
     </div>
+    <div class="mb-3">
+        <label for="inputStatus" class="form-label">Status</label>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="inputStatus" name="status" {{ $user && $user->status == 1 ? 'checked':'' }}>
+            <label class="form-check-label" for="inputStatus">Enable/Disable</label>
+        </div>
+    </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>
 
+        @if($mode == 'edit')
         <form action="{{ route('users.crud.create') }}" method="post">
             @csrf
             @method('delete')
             <input type="hidden" name="uuid" value="{{ $user ? $user->uuid : '' }}"/>
             <button type="submit" class="btn btn-primary">Delete</button>
         </form>
-
+        @endif
+        
         <a href="{{ route('users.index') }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 @endsection
 @section('script')
 <!-- apexcharts -->

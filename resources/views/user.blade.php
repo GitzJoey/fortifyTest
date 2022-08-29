@@ -24,8 +24,6 @@
     <table class="table table-nowrap mb-0">
         <thead class="table-light">
             <tr>
-                <th scope="col">
-                </th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Roles</th>
@@ -35,12 +33,6 @@
         <tbody>
             @foreach ($userLists as $u)
             <tr>
-                <td>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                        <label class="form-check-label" for="cardtableCheck01"></label>
-                    </div>
-                </td>
                 <td>{{ $u->name }}</td>
                 <td>{{ $u->email }}</td>
                 <td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -14,16 +15,22 @@ class RoleController extends Controller
 
     public function index()
     {
-        return view('role');
+        $roleLists = Role::latest()->get();
+
+        return view('role')->with('roleLists', $roleLists);
     }
 
-    public function crud(Request $request, Role $role)
+    public function crud(Request $request, ?Role $role = null)
     {
-        $mode = 'create';
+        $mode = $role ? 'edit':'create';
 
+        $permissions = Permission::pluck('name', 'id');
 
-
-        return view('role-crud')->with('mode', $mode);
+        return view('role-crud')->with([
+            'mode' => $mode, 
+            'role' => $role,
+            'permissions' => $permissions
+        ]);
     }
 
     public function list(Request $request)
