@@ -10,14 +10,21 @@
 @slot('title') {{ ucfirst($mode) }} Roles @endslot
 @endcomponent
 
-<form action="">
+<form action="{{ route('roles.crud.create') }}" method="post">
+    @csrf
+    @if ($mode == 'edit')
+        @method('patch')
+    @else
+        @method('post')
+    @endif
+    <input type="hidden" name="id" value="{{ $role ? $role->id : '' }}"/>
     <div class="mb-3">
         <label for="inputName" class="form-label">Name</label>
         <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{ $role ? $role->name : '' }}">
     </div>
     <div class="mb-3">
-        <label for="inputPermission" class="form-label">Permission</label>
-        <select class="form-select" multiple id="inputPermission" name="permission[]">
+        <label for="inputPermission" class="form-label">Permissions</label>
+        <select class="form-select" multiple id="inputPermission" name="permissions[]">
             @foreach ($permissions as $key=>$value)
                 <option value="{{ $key }}" {{ !empty($selectedPermissions) && $selectedPermissions->contains($key) ? 'selected':'' }}>{{ $value }}</option>
             @endforeach
@@ -30,7 +37,7 @@
         <form action="{{ route('roles.crud.create') }}" method="post">
             @csrf
             @method('delete')
-            <input type="hidden" name="uuid" value="{{ $role ? $role->id : '' }}"/>
+            <input type="hidden" name="id" value="{{ $role ? $role->id : '' }}"/>
             <button type="submit" class="btn btn-primary">Delete</button>
         </form>
         @endif

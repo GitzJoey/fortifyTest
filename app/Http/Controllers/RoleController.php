@@ -39,18 +39,40 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         $name = $request->name;
+        $selectedPermissions = $request->permissions;
 
+        $role = new Role();
+        $role->name = $name;
 
+        $role->save();
+        $role->syncPermissions($selectedPermissions);
+
+        return redirect()->route('roles.index');
     }
 
     public function update(Request $request)
     {
-        
+        $id = $request->id;
+        $name = $request->name;
+        $selectedPermissions = $request->permissions;
+
+        $role = Role::find($id);
+        $role->name = $name;
+
+        $role->save();
+        $role->syncPermissions($selectedPermissions);
+
+        return redirect()->route('roles.index');
     }
 
     public function delete(Request $request)
     {
+        $id = $request->id;
+
+        $role = Role::find($id);
+        $role->delete();
         
+        return redirect()->route('roles.index');
     }
 
 }
