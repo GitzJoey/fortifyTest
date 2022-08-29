@@ -26,15 +26,20 @@ class RoleController extends Controller
 
         $permissions = Permission::pluck('name', 'id');
 
+        $selectedPermissions = $role ? $role->permissions->pluck('id') : null;
+
         return view('role-crud')->with([
             'mode' => $mode, 
             'role' => $role,
-            'permissions' => $permissions
+            'permissions' => $permissions,
+            'selectedPermissions' => $selectedPermissions
         ]);
     }
     
     public function create(Request $request)
     {
+        $name = $request->name;
+
 
     }
 

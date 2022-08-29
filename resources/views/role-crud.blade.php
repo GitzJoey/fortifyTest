@@ -17,9 +17,9 @@
     </div>
     <div class="mb-3">
         <label for="inputPermission" class="form-label">Permission</label>
-        <select class="form-select" multiple id="inputPermission">
+        <select class="form-select" multiple id="inputPermission" name="permission[]">
             @foreach ($permissions as $key=>$value)
-                <option value="{{ $key }}">{{ $value }}</option>
+                <option value="{{ $key }}" {{ !empty($selectedPermissions) && $selectedPermissions->contains($key) ? 'selected':'' }}>{{ $value }}</option>
             @endforeach
         </select>
     </div>

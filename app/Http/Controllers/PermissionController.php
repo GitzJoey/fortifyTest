@@ -40,26 +40,4 @@ class PermissionController extends Controller
 
         return redirect()->route('permissions.index');
     }
-
-    public function update(Request $request)
-    {
-        $id = $request->id;
-        $name = $request->name;
-
-        $p = Permission::find($id);
-
-        if ($p) {
-            $p->update([
-                'name' => $name,
-            ]);
-        }
-
-        return redirect()->route('permissions.index');        
-    }
-
-    public function delete(Request $request)
-    {
-        return redirect()->route('permissions.index');
-    }
-
 }

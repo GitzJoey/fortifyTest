@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title') @lang('translation.users') @endsection
+@section('title') @lang('translation.roles') @endsection
 @section('css')
 <link href="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('assets/libs/swiper/swiper.min.css')}}" rel="stylesheet" type="text/css" />
