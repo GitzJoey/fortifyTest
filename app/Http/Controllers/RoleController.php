@@ -32,12 +32,7 @@ class RoleController extends Controller
             'permissions' => $permissions
         ]);
     }
-
-    public function list(Request $request)
-    {
-
-    }
-
+    
     public function create(Request $request)
     {
 

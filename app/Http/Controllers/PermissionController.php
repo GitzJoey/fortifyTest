@@ -14,28 +14,52 @@ class PermissionController extends Controller
 
     public function index()
     {
-        return view('permission');
+        $permissionLists = Permission::latest()->get();
+
+        return view('permission')->with('permissionLists', $permissionLists);
     }
 
-    public function crud(Request $request, Permission $permission)
+    public function crud(Request $request, ?Permission $permission = null)
     {
-        $mode = 'create';
-        return view('permission-crud')->with('mode', $mode);
+        $mode = $permission ? 'edit':'create';
+
+        return view('permission-crud')->with([
+            'mode' => $mode,
+            'permission' => $permission
+        ]);
     }
 
     public function create(Request $request)
     {
+        $name = $request->name;
 
+        $p = new Permission();
+        $p->name = $name;
+
+        $p->save();
+
+        return redirect()->route('permissions.index');
     }
 
     public function update(Request $request)
     {
-        
+        $id = $request->id;
+        $name = $request->name;
+
+        $p = Permission::find($id);
+
+        if ($p) {
+            $p->update([
+                'name' => $name,
+            ]);
+        }
+
+        return redirect()->route('permissions.index');        
     }
 
     public function delete(Request $request)
     {
-        
+        return redirect()->route('permissions.index');
     }
 
 }

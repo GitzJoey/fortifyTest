@@ -7,13 +7,21 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Dashboards @endslot
-@slot('title') Dashboard @endslot
+@slot('title') Roles @endslot
 @endcomponent
 
 <form action="">
     <div class="mb-3">
         <label for="inputName" class="form-label">Name</label>
         <input type="text" class="form-control" id="inputName" placeholder="Name" name="name" value="{{ $role ? $role->name : '' }}">
+    </div>
+    <div class="mb-3">
+        <label for="inputPermission" class="form-label">Permission</label>
+        <select class="form-select" multiple id="inputPermission">
+            @foreach ($permissions as $key=>$value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>

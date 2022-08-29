@@ -13,20 +13,25 @@
     <table class="table table-nowrap mb-0">
         <thead class="table-light">
             <tr>
-                <th scope="col">
-                </th>
                 <th scope="col">Name</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
-
+            @foreach ($permissionLists as $p)
+                <tr>
+                    <td>{{ $p->name }}</td>
+                    <td>
+                        <a href="{{ route('permissions.crud', $p->id) }}" class="btn btn-sm btn-light"><i data-feather="edit" class="icon-xs"></i></a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
 
 <div class="mt-5">
-    <a href="{{ route('users.crud') }}" class="btn btn-primary">Create</a>
+    <a href="{{ route('permissions.crud') }}" class="btn btn-primary">Create</a>
 </div>
 
 @endsection
