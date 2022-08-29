@@ -9,6 +9,17 @@
 @slot('li_1') Dashboards @endslot
 @slot('title') User @endslot
 @endcomponent
+
+<div class="app-search d-none d-md-block">
+    <div class="position-relative">
+        <input type="text" class="form-control" placeholder="Search..." autocomplete="off"
+            id="search-options-users" onchange="search()">
+        <span class="mdi mdi-magnify search-widget-icon"></span>
+        <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
+            id="search-close-options"></span>
+    </div>
+</div>
+
 <div class="table-responsive table-card">
     <table class="table table-nowrap mb-0">
         <thead class="table-light">
@@ -52,6 +63,12 @@
 
 @endsection
 @section('script')
+<script>
+    function search() {
+        let path = window.location.href.split('?')[0];
+        window.location.href = path + '?search=' + document.getElementById('search-options-users').value;
+    }
+</script>
 <!-- apexcharts -->
 <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>

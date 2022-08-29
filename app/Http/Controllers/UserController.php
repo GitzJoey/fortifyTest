@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -13,9 +14,15 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $userLists = User::latest()->get();
+        $search = $request->has('search') ? $request['search'] : '';
+
+        if (!empty($search)) {
+            $userLists = User::where('name', 'like', '%' . $search . '%')->latest()->get();
+        } else {
+            $userLists = User::latest()->get();
+        }
         return view('user')->with('userLists', $userLists);
     }
 
@@ -37,10 +44,12 @@ class UserController extends Controller
         $name = $request->name;
         $email = $request->email;
         $roles = $request->roles;
-        
+        $password = $request->password;
+
         $user = new User();
         $user->name = $name;
         $user->email = $email;
+        $user->password = Hash::make($password);
         $user->save();
 
         $role = Role::find($roles);
@@ -55,6 +64,7 @@ class UserController extends Controller
         $uuid = $request->uuid;
         $name = $request->name;
         $roles = $request->roles;
+        $password = $request->password;
 
         $user = User::where('uuid', '=', $uuid)->first();
         $roles = Role::find($roles);
@@ -64,7 +74,11 @@ class UserController extends Controller
                 'name' => $name
             ]);
 
-            $user->assignRole($roles);
+            $user->syncRoles([$roles->name]);
+        }
+
+        if (!empty($password)) {
+            $user->password = Hash::make($password);
         }
 
         return redirect()->route('users.index');
