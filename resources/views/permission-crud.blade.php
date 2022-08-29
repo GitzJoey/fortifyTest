@@ -7,7 +7,7 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Dashboards @endslot
-@slot('title') Permissions @endslot
+@slot('title') {{ ucfirst($mode) }} Permissions @endslot
 @endcomponent
 
 <form action="">
@@ -16,7 +16,7 @@
         <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{ $permission ? $permission->name : '' }}">
     </div>
     <div class="text-end">
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>
         <a href="{{ route('permissions.index') }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>

@@ -7,7 +7,7 @@
 @section('content')
 @component('components.breadcrumb')
 @slot('li_1') Dashboards @endslot
-@slot('title') Roles @endslot
+@slot('title') {{ ucfirst($mode) }} Roles @endslot
 @endcomponent
 
 <form action="">
