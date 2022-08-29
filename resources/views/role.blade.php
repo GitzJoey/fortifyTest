@@ -22,7 +22,17 @@
                 <tr>
                     <td>{{ $r->name }}</td>
                     <td>
-                        <a href="{{ route('roles.crud', $r->id) }}" class="btn btn-sm btn-light"><i data-feather="edit" class="icon-xs"></i></a>
+                        <div class="d-flex flex-row">
+                            <a href="{{ route('roles.crud', $r->id) }}" class="btn btn-sm btn-light"><i data-feather="edit" class="icon-xs"></i></a>
+                            @if($r->name != 'super-user')
+                                <form action="{{ route('roles.crud.create') }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <input type="hidden" name="id" value="{{ $r->id }}"/>
+                                    <button type="submit" class="btn btn-sm btn-light"><i data-feather="trash" class="icon-xs"></i></button>
+                                </form>
+                            @endif
+                        </div>
                     </td>
                 </tr>
             @endforeach

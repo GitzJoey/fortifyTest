@@ -51,16 +51,6 @@
     </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>
-
-        @if($mode == 'edit')
-        <form action="{{ route('users.crud.create') }}" method="post">
-            @csrf
-            @method('delete')
-            <input type="hidden" name="uuid" value="{{ $user ? $user->uuid : '' }}"/>
-            <button type="submit" class="btn btn-primary">Delete</button>
-        </form>
-        @endif
-        
         <a href="{{ route('users.index') }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>

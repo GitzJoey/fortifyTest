@@ -32,16 +32,6 @@
     </div>
     <div class="text-end">
         <button type="submit" class="btn btn-primary">{{ ucfirst($mode) }}</button>
-
-        @if($mode == 'edit')
-        <form action="{{ route('roles.crud.create') }}" method="post">
-            @csrf
-            @method('delete')
-            <input type="hidden" name="id" value="{{ $role ? $role->id : '' }}"/>
-            <button type="submit" class="btn btn-primary">Delete</button>
-        </form>
-        @endif
-
         <a href="{{ route('roles.index') }}" class="btn btn-primary">Cancel</a>
     </div>
 </form>

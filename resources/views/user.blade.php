@@ -41,7 +41,15 @@
                     @endforeach
                 </td>
                 <td>
-                    <a href="{{ route('users.crud', $u->uuid) }}" class="btn btn-sm btn-light"><i data-feather="edit" class="icon-xs"></i></a>
+                    <div class="d-flex flex-row">
+                        <a href="{{ route('users.crud', $u->uuid) }}" class="btn btn-sm btn-light"><i data-feather="edit" class="icon-xs"></i></a>
+                        <form action="{{ route('users.crud.create') }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <input type="hidden" name="uuid" value="{{ $u->uuid }}"/>
+                            <button type="submit" class="btn btn-sm btn-light"><i data-feather="trash" class="icon-xs"></i></button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @endforeach
