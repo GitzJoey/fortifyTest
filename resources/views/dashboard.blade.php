@@ -554,7 +554,13 @@
     {!! auth()->user()->twoFactorQrCodeSvg() !!}
 @endif
 
-<br>
+<br/>
+
+<a href="{{ route('db.changepassword') }}" class="btn btn-primary">Change Password</a>
+
+<br/>
+
+<br/>
 
 <form action="{{ route('logout') }}" method="post">
        @csrf

@@ -29,6 +29,8 @@ Route::get('/home', function () {
 
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('', [DashboardController::class, 'index'])->name('db');
+    Route::get('/changepassword', [DashboardController::class, 'changepassword'])->name('db.changepassword');
+
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/crud/{user:uuid?}', [UserController::class, 'crud'])->name('users.crud');
    
